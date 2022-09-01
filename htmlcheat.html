@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Memomy Code</h1>
+    <h2>I - Structure de base</h2>
+    <h3>déclaration des valarable/liste/objet</h3>
+    <p>function love.load() <br>
+        end</p>
+    <h3>déroulement du jeu / Delta time</h3>
+    <p>function love.update(dt)<br>
+        end</p>
+    <h3>Affichage dans l'écran</h3>
+    <p>function love.draw()<br>
+        end</p>
+    <h3>utilisation du claviers</h3>
+    <p>function love.keypressed(key)<br>
+        end</p>
+    <h2>II - Affichez un élément + Déplacement</h2>
+    <a href="https://www.gamecodeur.fr/liste-ateliers/atelier-love2d-pixels-origine/?vimeography_gallery=7&vimeography_video=188119291"
+        target="_blank">(Démo vidéo)</a>
+        <h3>Exemple d'un code</h3>
+    <p>x = 10<br>
+        y = 10<br>
+        <br>
+        function love.load()<br>
+        imgPlayer = love.graphics.newImage("img/Blue.png")<br>
+        rectangle = love.graphics.rectangle("fill", 10, 10, 1, 1)<br>
+        end<br>
+        <br>
+        function love.update(dt)<br>
+        if love.keyboard.isDown("right") == true then<br>
+        x = x + 1<br>
+        elseif love.keyboard.isDown("left") == true then<br>
+        x = x - 1<br>
+        elseif love.keyboard.isDown("down") == true then<br>
+        -- Affichage des valeurs et de l'aide<br>
+        y = y + 1<br>
+        elseif love.keyboard.isDown("up") == true then<br>
+        y = y - 1<br>
+        end<br>
+        end<br>
+        <br>
+        function love.draw()<br>
+        --love.graphics.draw(imgPlayer, a, z)<br>
+        rectangle = love.graphics.rectangle("fill", x, y, 10, 10)<br>
+        -- Affichage de la position X et Y<br>
+        love.graphics.print(<br>
+        "x=" .. tostring(x) .. " | y=" .. tostring(y) .. " | " .. "ox=" .. tostring(ox) .. " | oy=" .. tostring(oy),
+        0,
+        0
+        )<br>
+        end</p>
+    <h2>III - Obtenir la hauteur où largeur de l'écran</h2>
+    <p>largeur = love.graphics.getWidth()<br>
+    <p>hauteur = love.graphics.getHeight()</p>
+    <h2>IV - Algo Rebond</h2>
+    <p>if objet.x > largeur or objet.x < 0 then <br>
+    objet.vx = - objet.vx</p>
+    <h2>V - Gestion de projectile</h2>
+    <h3>Explication vidéo Gamecodeur</h3>
+    <a href="https://www.gamecodeur.fr/programmation-lua-love2d-10-super-exercices-de-programmation-pour-sexercer-et-progresser/" target="_blank">Accedez au module "LA SULFATEUSE"</a>
+    <h3>Méthode 1</h3>
+    <p>    -- CREER LA LISTE DE PROJECTILE --<br>
+        local projectiles = {} <br>  
+        -- Fonction Tir <br>
+        <br> 
+        -- CREER LA FONCTION QUI TIR LE PROJECTILE -- <br>  
+        function Shoot(pX, pY, pAngle, pVitesse, pImg, pShoot) <br>  
+            local projectile = {} <br>
+                  projectile.X = pX <br>
+                  projectile.Y = pY <br>
+                  projectile.angle = pAngle <br>
+                  projectile.vitesse = pVitesse <br>
+                  projectile.img = pImg <br>
+                  projectile.shoot = pShoot <br>
+            table.insert(projectiles, projectile) <br>
+        end<br>
+        <br> 
+        -- AJOUTER L'IMAGE DU PROJECTILE DANS LA FONTION LOVE.LOAD -- <br> 
+        function love.load()<br> 
+        imgProj_1 = love.graphics.newImage("img/Projectile/Tir_1.png") <br> 
+        end<br> 
+        <br> 
+        -- PARAMETRER LES MOUVEMENTS DU PROJECTILE DANS LA FONTION LOVE.UPDATE -- <br> 
+        ** CI-DESSOUS LES DÉPLACEMENT X ET Y VARIE AVEC L'ANGLE ET LA VITESSE ** <br> 
+        function love.update(dt)<br> 
+        for k, projectile in ipairs(projectiles) do<br> 
+        projectile.X = projectile.X + (dt * projectile.vitesse) * math.cos(projectile.angle)<br> 
+        projectile.Y = projectile.Y + (dt * projectile.vitesse) * math.sin(projectile.angle)<br> 
+    end<br> 
+    <br> 
+    -- AFFICHER LES PROJECTILES DANS LA FONCTION LOVE.DRAW -- <br> 
+    function love.draw()<br> 
+        for k, projectile in ipairs(projectiles) do<br> 
+            love.graphics.draw(projectile.img, projectile.X, projectile.Y, projectile.angle, 1, 1, imgProj_1:getWidth() / 2, imgProj_1:getHeight() / 2)<br> 
+        end<br> 
+    end</p>
+    <h2>VI - Gestion des déplacements et Rotations</h2>
+    <h3>Explication vidéo Gamecodeur</h3>
+    <a href="https://www.gamecodeur.fr/replay-des-dlc-david-live-code/?vimeography_gallery=1&vimeography_video=693922425" target="_blank">Accedez au module "DLC 99 La formule magique"</a>
+    <h2>VII - Importer un fichier </h2>
+    <a href="https://github.com/dmekersa/Gamecodeur/tree/master/Module" target="_blank" rel="noopener noreferrer">Exemple github</a>
+    <h2>VIII - Gestion d'une liste </h2>
+    <h3>Explication vidéo Gamecodeur</h3>
+    <a href="https://www.gamecodeur.fr/programmation-fondamentale-coder-un-inventaire-de-rpg-avec-une-liste-mise-en-pratique/" target="_blank" rel="noopener noreferrer">Atelier : Coder un inventaire de RPG avec une liste</a>
+    <h3>Parcourir une liste via la boucle FOR</h3>
+    <p>local projectiles = {}<br>
+        for k, projectile in ipairs(projectiles) do<br>
+        // Commande d'execution //<br>
+    end 
+    </p>
+    <h2>IX - Switch On/Off (dans notre exemple activé le mode débug)</h2>
+    <h3>Méthode 1</h3>
+    <p>
+        if love.keyboard.isDown("f1") then<br>
+            debug = not debug<br>
+        end  </p>
+    <h3>Méthode 2</h3>
+    <p>    if love.keyboard.isDown("f2") then<br>
+        if debug == true then <br>
+            debug = false<br>
+        else <br>
+            debug = true<br>
+        end<br>
+    end</p>
+    <h2>X - Algo Impact avec un éléments</h2>
+    <h3>Algo à utiliser</h3>
+    <p>function distance(x1, y1, x2, y2)<br>
+            return ((x2 - x1) ^ 2 + (y2 - y1) ^ 2) ^ 0.5<br>
+        end</p>
+    <h3>Exemple d'utilisation</h3>
+    <p>** Explication du code : **<br>
+        1 - la boucle FOR "projectiles" est dans la boucle FOR "ennemis"<br>
+        2 - L'algo est dans la boucle FOR "projectiles"<br>
+        3 - Bien respecter les paramètres de la fonction de l'algo | x1 et y1 sont l'élément A | x2 et y2 sont l'élément B</p>
+    <p> -- PLACER L'ALGO EN HAUT DU CODE --<br>
+        function distance(x1, y1, x2, y2)<br>
+            return ((x2 - x1) ^ 2 + (y2 - y1) ^ 2) ^ 0.5<br>
+        end<br>
+        <br>
+        -- DANS LA FONCTION LOVE.LOAD --<br>
+        -- PARCOURIR LA LISTE CONTENANT LES ENNEMIS --<br>
+        for n = #ennemis, 1, -1 do<br>
+            local ennemiG = ennemis[n]<br>
+            <br>
+            -- PARCOURIR LA LISTE CONTENANT LES PROJECTILES --<br>
+            for k = #projectiles, 1, -1 do<br>
+                local projectileG = projectiles[k]<br>
+                -- SUPPRESION DE L'ENNEMI APRES IMPACT DU PROJECTILE<br>
+                if distance(projectileG.X, projectileG.Y, ennemiG.X, ennemiG.Y) < 10 then<br>
+                    table.remove(ennemis, n)<br>
+                    table.remove(projectiles, k)<br>
+                end<br>
+            end<br>
+        end</p>
+        <h2>XI - ANGLE DE TIR/VISION</h2>
+        <h3>Méthode 1</h3>
+        <p> -- PLACER L'ALGO EN HAUT DU CODE -- <br>
+            function math.angle(x1,y1, x2,y2) <br>
+                return math.atan2(y2-y1, x2-x1) <br>
+            end<br>
+            <br>
+            -- DANS FONCTIONE LOVE.LOAD -- <br>
+        tank.focus = math.angle(tank.X, tank.Y, focus.X, focus.Y)</p>
+        <h2>XII - TIMER SHOOT</h2>
+        <h3>Méthode 1</h3>
+        <p>
+            if mouseR then<br>
+                if charge == false then<br>
+                    timer = timer + dt<br>
+                end<br>
+            else<br>
+                timer = 0<br>
+                charge = false<br>
+            end<br>
+            if timer >= 0.5 and charge == false then<br>
+                charge = true<br>
+                Shoot(tank.X, tank.Y, tank.focus, 1000, imgProj_2, "surcharge") <br>
+                timer = 0<br>
+            end</p>
+        <h2>XIII - Cycle de jeu | ECRAN TITRE | MENU | START GAME | GAME OVER</h2>
+        <a href="https://www.gamecodeur.fr/replay-des-dlc-david-live-code/?vimeography_gallery=2&vimeography_video=637021036" target="_blank">DLC 82 Le cycle du jeu</a>
+        <h2>XIV - Changer la police des commentaires </h2>
+        <h3>Via le site ci-dessous</h3>
+        <a href="http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20" target="_blank">http://patorjk.com/</a>
+        <h2>XV - CARTE et position (à revoir)</h2>
+        <a href="https://www.gamecodeur.fr/liste-ateliers/atelier-tilemap-love2d-deplacements-collisions/?vimeography_gallery=16&vimeography_video=198015832" target="_blank">Lien vers le cours Collision sur Gamecodeur</a>
+        <a href="codeSource/positionMap.html" target="_blank">Code source du cours</a>
+        <h2>VXI - TIMER</h2>
+        <h3>Explication vidéo ci-dessous</h3>
+        <a href="https://www.dropbox.com/s/e0p2orpnp3cm43x/Replay%20DLC%2089%20-%20Maitriser%20le%20temps.mp4?dl=0" target="_blank">DLC 89 de David Live Code</a>
+        <h2>XVII - IA poursuite</h2>
+        <h3>Extrait de code</h3>
+        <p>if ennemiG.AI == "poursuite" then<br>
+            -- angle entre l'ennemi et le player<br>
+            local anglePoursuite = math.angle(ennemiG.X, ennemiG.Y, tank.X, tank.Y)<br>
+            ennemiG.angle = anglePoursuite<br>
+            local ratio_X = ennemiG.vitesse * math.cos(anglePoursuite)<br>
+            local ratio_Y = ennemiG.vitesse * math.sin(anglePoursuite)<br>
+            ennemiG.X = ennemiG.X + ratio_X * dt<br>
+            ennemiG.Y = ennemiG.Y + ratio_Y * dt<br>
+            if distance(ennemiG.X, ennemiG.Y, tank.X, tank.Y) > 170 then<br>
+                ennemiG.AI = "back"<br>
+            end<br>
+        end</p>
+        <h2>XVII - Sprite / Animation</h2>
+        <h3>Explication vidéo ci-dessous</h3>
+        <a href="https://www.gamecodeur.fr/replay-des-dlc-david-live-code/?vimeography_gallery=1&vimeography_video=724464321" target="_blank">DLC 110 - Animation image par image</a>
+</body>
+
+</html>
